@@ -9,14 +9,18 @@ export const metadata: Metadata = {
   description: 'Aplicativo de gestão de tarefas',
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+type LayoutProps = Readonly<{
   children: React.ReactNode
-}>) {
+}>
+
+export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="pt-br">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <main className="bg-slate-950 flex flex-1 h-screen text-white flex-col">
+          {children}
+        </main>
+      </body>
     </html>
   )
 }

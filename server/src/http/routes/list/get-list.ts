@@ -10,7 +10,7 @@ export async function getList(app: FastifyInstance) {
 
     const { listId } = requestParams.parse(request.params)
 
-    const listWithTasks = await prisma.list.findUnique({
+    const list = await prisma.list.findUnique({
       where: {
         id: listId,
       },
@@ -19,6 +19,13 @@ export async function getList(app: FastifyInstance) {
       },
     })
 
-    return reply.send({ ...listWithTasks })
+    if (!list) {
+      return reply.status(404).send('List not found.')
+    }
+
+    return reply.send({
+      name: list.name,
+      tasks: list.tasks,
+    })
   })
 }

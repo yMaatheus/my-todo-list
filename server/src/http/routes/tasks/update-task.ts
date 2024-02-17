@@ -16,7 +16,7 @@ export async function updateTask(app: FastifyInstance) {
     const { taskId } = requestParams.parse(request.params)
     const { name, completed } = requestBody.parse(request.body)
 
-    const { listId: _, ...task } = await prisma.task.update({
+    const { createdAt, updatedAt } = await prisma.task.update({
       where: {
         id: taskId,
       },
@@ -26,6 +26,11 @@ export async function updateTask(app: FastifyInstance) {
       },
     })
 
-    return reply.send({ ...task })
+    return reply.send({
+      name,
+      completed,
+      createdAt,
+      updatedAt,
+    })
   })
 }

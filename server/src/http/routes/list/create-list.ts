@@ -5,11 +5,11 @@ import z from 'zod'
 
 export async function createList(app: FastifyInstance) {
   app.post('/list', async (request, reply) => {
-    const requestBodySchema = z.object({
+    const requestBody = z.object({
       name: z.string(),
     })
 
-    const { name } = requestBodySchema.parse(request.body)
+    const { name } = requestBody.parse(request.body)
 
     const list = await prisma.list.create({ data: { name } })
 

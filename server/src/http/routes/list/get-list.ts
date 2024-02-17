@@ -1,6 +1,5 @@
 import { prisma } from '@/lib/prisma'
 import { FastifyInstance } from 'fastify'
-import { StatusCodes } from 'http-status-codes'
 import z from 'zod'
 
 export async function getList(app: FastifyInstance) {
@@ -20,6 +19,6 @@ export async function getList(app: FastifyInstance) {
       },
     })
 
-    return reply.status(StatusCodes.OK).send({ ...listWithTasks })
+    return reply.send({ ...listWithTasks })
   })
 }

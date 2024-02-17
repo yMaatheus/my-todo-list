@@ -1,6 +1,5 @@
 import { prisma } from '@/lib/prisma'
 import { FastifyInstance } from 'fastify'
-import { StatusCodes } from 'http-status-codes'
 import z from 'zod'
 
 export async function deleteList(app: FastifyInstance) {
@@ -13,6 +12,6 @@ export async function deleteList(app: FastifyInstance) {
 
     await prisma.list.delete({ where: { id: listId } })
 
-    return reply.status(StatusCodes.OK).send()
+    return reply.send()
   })
 }

@@ -25,7 +25,15 @@ export async function getListTasks(app: FastifyInstance) {
 
     return reply.send({
       name: list.name,
-      tasks: list.tasks,
+      tasks: list.tasks.map((task) => {
+        return {
+          taskId: task.id,
+          name: task.name,
+          completed: task.completed,
+          createdAt: task.createdAt,
+          updatedAt: task.updatedAt,
+        }
+      }),
     })
   })
 }

@@ -23,9 +23,7 @@ export default function RootLayout({ children }: LayoutProps) {
           inter.variable,
         )}
       >
-        <main className="bg-zinc-950 flex flex-1 h-screen text-white flex-col">
-          {children}
-        </main>
+        {children}
       </body>
     </html>
   )

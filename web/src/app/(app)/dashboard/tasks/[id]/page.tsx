@@ -35,11 +35,11 @@ export default async function Page({ params }: PageParams) {
     <div className="flex flex-1 flex-col space-y-8 my-12">
       <div className="flex items-center gap-2">
         <h1 className="text-2xl font-semibold ml-2">{name}</h1>
-        <CreateTask id={id} />
+        <CreateTask listId={id} />
 
         <EditList id={id} name={name} />
 
-        <DeleteList id={id} />
+        <DeleteList listId={id} />
       </div>
       <Table>
         <TableHeader>

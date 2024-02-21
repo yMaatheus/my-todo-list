@@ -8,7 +8,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 
-export function DeleteTaskDialog() {
+export function DeleteTask() {
   return (
     <AlertDialogContent>
       <AlertDialogHeader>

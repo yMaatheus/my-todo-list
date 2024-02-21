@@ -1,24 +1,14 @@
-import { AlertDialog, AlertDialogTrigger } from '@/components/ui/alert-dialog'
-import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
-import {
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from '@/components/ui/dropdown-menu'
-import { Sheet, SheetTrigger } from '@/components/ui/sheet'
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Pencil2Icon, PlusIcon, TrashIcon } from '@radix-ui/react-icons'
-import { DeleteTaskDialog } from './components/delete-task-dialog'
-import { EditTaskSheet } from './components/edit-task-sheet'
-import { TaskActionsDropDrown } from './components/task-actions-dropdown'
+import { DeleteList } from './components/list-delete'
+import { EditList } from './components/list-edit'
+import { CreateTask } from './components/task-create'
+import { TaskTableRow } from './components/task-table-row'
 
 type PageParams = {
   params: {
@@ -35,7 +25,7 @@ export type Task = {
   updatedAt: string
 }
 
-type TaskResponseData = {
+export type TaskResponseData = {
   name: string
   tasks: Task[]
 }
@@ -58,15 +48,11 @@ export default async function Page({ params }: PageParams) {
     <div className="flex flex-1 flex-col space-y-8 my-12">
       <div className="flex items-center gap-2">
         <h1 className="text-2xl font-semibold ml-2">{data.name}</h1>
-        <Button size="icon" variant="ghost" className="h-8">
-          <PlusIcon />
-        </Button>
-        <Button size="icon" variant="ghost" className="h-8">
-          <Pencil2Icon />
-        </Button>
-        <Button size="icon" variant="ghost" className="h-8">
-          <TrashIcon className=" text-red-500" />
-        </Button>
+        <CreateTask />
+
+        <EditList data={data} />
+
+        <DeleteList />
       </div>
       <Table>
         <TableHeader>
@@ -79,39 +65,7 @@ export default async function Page({ params }: PageParams) {
         </TableHeader>
         <TableBody>
           {data?.tasks?.map((task) => (
-            <TableRow key={task.taskId}>
-              <Sheet>
-                <AlertDialog>
-                  <TableCell className="w-[60px]">
-                    <Checkbox checked={task.completed} />
-                  </TableCell>
-                  <TableCell className="font-medium text-center">
-                    {task.name}
-                  </TableCell>
-                  <TableCell>
-                    {task.description ? task.description : ''}
-                  </TableCell>
-                  <TableCell>
-                    <TaskActionsDropDrown>
-                      <DropdownMenuLabel>Ações</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <SheetTrigger asChild>
-                        <DropdownMenuItem>Editar</DropdownMenuItem>
-                      </SheetTrigger>
-
-                      <AlertDialogTrigger asChild>
-                        <DropdownMenuItem className="text-red-600 focus:text-red-600">
-                          Deletar
-                        </DropdownMenuItem>
-                      </AlertDialogTrigger>
-                    </TaskActionsDropDrown>
-                  </TableCell>
-
-                  <DeleteTaskDialog />
-                  <EditTaskSheet name={task.name} description={task.name} />
-                </AlertDialog>
-              </Sheet>
-            </TableRow>
+            <TaskTableRow key={task.taskId} task={task} />
           ))}
         </TableBody>
       </Table>

@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/sheet'
 import { Textarea } from '@/components/ui/textarea'
 
-export function EditTaskSheet({
+export function EditTask({
   name,
   description,
 }: {

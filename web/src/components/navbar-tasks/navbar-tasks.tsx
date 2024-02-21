@@ -4,18 +4,19 @@ import { Circle } from '@phosphor-icons/react/dist/ssr/Circle'
 import { ListBulletIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ListResponseData } from './navbar'
+import { ListResponseData } from '../navbar'
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from './ui/accordion'
+} from '../ui/accordion'
 
 type Props = {
   data: ListResponseData[]
+  children: React.ReactNode
 }
 
-export function NavBarTasks({ data }: Props) {
+export function NavBarTasks({ data, children }: Props) {
   const pathname = usePathname()
 
   return (
@@ -29,20 +30,20 @@ export function NavBarTasks({ data }: Props) {
       {data.map((item) => (
         <AccordionContent
           key={item.id}
-          className={cn(
-            'flex items-center gap-2 ml-8 hover:no-underline p-0',
-            pathname.startsWith('/dashboard/tasks/') && 'underline',
-          )}
+          className={cn('flex items-center gap-2 ml-8 p-0 hover:underline')}
         >
           <Circle
             className="w-2 h-2"
             weight={
-              pathname.startsWith('/dashboard/tasks/') ? 'fill' : 'regular'
+              pathname.startsWith(`/dashboard/tasks/${item.id}`)
+                ? 'fill'
+                : 'regular'
             }
           />
           <Link href={`/dashboard/tasks/${item.id}`}>{item.name}</Link>
         </AccordionContent>
       ))}
+      {children}
     </AccordionItem>
   )
 }

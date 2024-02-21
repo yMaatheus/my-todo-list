@@ -10,11 +10,12 @@ export async function updateTask(app: FastifyInstance) {
 
     const requestBody = z.object({
       name: z.string().min(3).max(64),
+      description: z.string().max(256).optional(),
       completed: z.boolean(),
     })
 
     const { taskId } = requestParams.parse(request.params)
-    const { name, completed } = requestBody.parse(request.body)
+    const { name, description, completed } = requestBody.parse(request.body)
 
     const { createdAt, updatedAt } = await prisma.task.update({
       where: {
@@ -22,12 +23,14 @@ export async function updateTask(app: FastifyInstance) {
       },
       data: {
         name,
+        description,
         completed,
       },
     })
 
     return reply.send({
       name,
+      description,
       completed,
       createdAt,
       updatedAt,

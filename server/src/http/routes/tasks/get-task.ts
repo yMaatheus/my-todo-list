@@ -29,6 +29,7 @@ export async function getListTasks(app: FastifyInstance) {
         return {
           taskId: task.id,
           name: task.name,
+          description: task.description,
           completed: task.completed,
           createdAt: task.createdAt,
           updatedAt: task.updatedAt,

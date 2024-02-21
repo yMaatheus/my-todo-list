@@ -2,6 +2,7 @@ import { ModalClose } from '@/components/modal-close'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -13,8 +14,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { PlusIcon } from '@radix-ui/react-icons'
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
+import { revalidateTag } from 'next/cache'
 
 export function CreateTask({ id }: { id: string }) {
   async function handleSubmit(formData: FormData) {
@@ -35,8 +35,7 @@ export function CreateTask({ id }: { id: string }) {
       body: JSON.stringify({ name, description }),
     })
 
-    revalidatePath(`/dashboard/tasks/${id}`)
-    redirect(`/dashboard/tasks/${id}?modal=close`)
+    revalidateTag('task')
   }
 
   return (
@@ -71,9 +70,11 @@ export function CreateTask({ id }: { id: string }) {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" form="task-create-dialog-form">
-              Salvar alterações
-            </Button>
+            <DialogClose>
+              <Button type="submit" form="task-create-dialog-form">
+                Salvar alterações
+              </Button>
+            </DialogClose>
           </DialogFooter>
           <ModalClose />
         </form>

@@ -38,8 +38,13 @@ export function TaskTableRow({ task }: { task: Task }) {
             </TaskActionsDropDrown>
           </TableCell>
 
-          <DeleteTask />
-          <EditTask name={task.name} description={task.name} />
+          <DeleteTask taskId={task.taskId} />
+          <EditTask
+            taskId={task.taskId}
+            name={task.name}
+            description={task.name}
+            completed={task.completed}
+          />
         </AlertDialog>
       </Sheet>
     </TableRow>

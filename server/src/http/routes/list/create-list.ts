@@ -6,7 +6,7 @@ import z from 'zod'
 export async function createList(app: FastifyInstance) {
   app.post('/list', async (request, reply) => {
     const requestBody = z.object({
-      name: z.string(),
+      name: z.string().min(1).max(32),
     })
 
     const { name } = requestBody.parse(request.body)

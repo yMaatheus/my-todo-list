@@ -42,17 +42,17 @@ export default async function Page({ params }: PageParams) {
     },
   })
 
-  const data = (await result.json()) as TaskResponseData
+  const { name, tasks } = (await result.json()) as TaskResponseData
 
   return (
     <div className="flex flex-1 flex-col space-y-8 my-12">
       <div className="flex items-center gap-2">
-        <h1 className="text-2xl font-semibold ml-2">{data.name}</h1>
-        <CreateTask />
+        <h1 className="text-2xl font-semibold ml-2">{name}</h1>
+        <CreateTask id={id} />
 
-        <EditList data={data} />
+        <EditList id={id} name={name} />
 
-        <DeleteList />
+        <DeleteList id={id} />
       </div>
       <Table>
         <TableHeader>
@@ -64,9 +64,7 @@ export default async function Page({ params }: PageParams) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data?.tasks?.map((task) => (
-            <TaskTableRow key={task.taskId} task={task} />
-          ))}
+          {tasks?.map((task) => <TaskTableRow key={task.taskId} task={task} />)}
         </TableBody>
       </Table>
     </div>

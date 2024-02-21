@@ -11,8 +11,18 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { TrashIcon } from '@radix-ui/react-icons'
+import { redirect } from 'next/navigation'
 
-export function DeleteList() {
+export function DeleteList({ id }: { id: string }) {
+  async function handleDelete() {
+    'use server'
+
+    await fetch(`http://localhost:3333/list/${id}`, {
+      method: 'DELETE',
+    })
+    redirect('/dashboard')
+  }
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -29,7 +39,9 @@ export function DeleteList() {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction>Excluir</AlertDialogAction>
+          <form action={handleDelete}>
+            <AlertDialogAction type="submit">Excluir</AlertDialogAction>
+          </form>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

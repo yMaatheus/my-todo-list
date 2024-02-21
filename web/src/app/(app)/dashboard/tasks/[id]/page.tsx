@@ -40,9 +40,13 @@ type TaskResponseData = {
 
 export default async function Page({ params }: PageParams) {
   const { id } = params
+
+  if (!id) return null
+
   const result = await fetch(`http://localhost:3333/task/${id}`, {
     next: {
       revalidate: 3,
+      tags: ['task'],
     },
   })
 

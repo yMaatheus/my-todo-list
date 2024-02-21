@@ -1,4 +1,5 @@
 import { AlertDialog, AlertDialogTrigger } from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   DropdownMenuItem,
@@ -14,6 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { Pencil2Icon, PlusIcon, TrashIcon } from '@radix-ui/react-icons'
 import { DeleteTaskDialog } from './components/delete-task-dialog'
 import { EditTaskSheet } from './components/edit-task-sheet'
 import { TaskActionsDropDrown } from './components/task-actions-dropdown'
@@ -53,7 +55,19 @@ export default async function Page({ params }: PageParams) {
   const data = (await result.json()) as TaskResponseData
 
   return (
-    <div className="flex flex-1 w-4/5 flex-col space-y-6 mx-auto my-12">
+    <div className="flex flex-1 flex-col space-y-8 my-12">
+      <div className="flex items-center gap-2">
+        <h1 className="text-2xl font-semibold ml-2">{data.name}</h1>
+        <Button size="icon" variant="ghost" className="h-8">
+          <PlusIcon />
+        </Button>
+        <Button size="icon" variant="ghost" className="h-8">
+          <Pencil2Icon />
+        </Button>
+        <Button size="icon" variant="ghost" className="h-8">
+          <TrashIcon className=" text-red-500" />
+        </Button>
+      </div>
       <Table>
         <TableHeader>
           <TableRow>

@@ -25,7 +25,7 @@ export default function DashboardLayout({ children }: LayoutProps) {
           />
         </div>
       </nav>
-      <div className="col-span-8">{children}</div>
+      <div className="flex flex-1 col-span-8">{children}</div>
     </main>
   )
 }

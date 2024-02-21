@@ -36,7 +36,7 @@ export async function NavBar() {
       <NavItem
         icon={<Barbell className="h-5 w-5" />}
         label="Academia"
-        href="/dashboard"
+        href="/dashboard/gym"
       />
     </Accordion>
   )

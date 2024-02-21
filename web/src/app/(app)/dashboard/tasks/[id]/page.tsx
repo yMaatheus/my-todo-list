@@ -27,6 +27,7 @@ type PageParams = {
 export type Task = {
   taskId: string
   name: string
+  description?: string
   completed: boolean
   createdAt: string
   updatedAt: string
@@ -39,11 +40,13 @@ type TaskResponseData = {
 
 export default async function Page({ params }: PageParams) {
   const { id } = params
-  const result = await fetch(`http://localhost:3333/task/${id}`)
+  const result = await fetch(`http://localhost:3333/task/${id}`, {
+    next: {
+      revalidate: 3,
+    },
+  })
 
   const data = (await result.json()) as TaskResponseData
-
-  // console.log(data)
 
   return (
     <div className="flex flex-1 w-4/5 flex-col space-y-6 mx-auto my-12">
@@ -51,7 +54,7 @@ export default async function Page({ params }: PageParams) {
         <TableHeader>
           <TableRow>
             <TableHead className="w-[60px]">Status</TableHead>
-            <TableHead className="w-[200px] text-center">Nome</TableHead>
+            <TableHead className="w-[320px] text-center">Nome</TableHead>
             <TableHead>Descrição</TableHead>
             <TableHead className="w-[60px]"></TableHead>
           </TableRow>
@@ -68,14 +71,7 @@ export default async function Page({ params }: PageParams) {
                     {task.name}
                   </TableCell>
                   <TableCell>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
+                    {task.description ? task.description : ''}
                   </TableCell>
                   <TableCell>
                     <TaskActionsDropDrown>

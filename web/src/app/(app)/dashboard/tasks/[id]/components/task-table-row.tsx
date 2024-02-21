@@ -1,5 +1,4 @@
 import { AlertDialog, AlertDialogTrigger } from '@/components/ui/alert-dialog'
-import { Checkbox } from '@/components/ui/checkbox'
 import {
   DropdownMenuItem,
   DropdownMenuLabel,
@@ -13,6 +12,7 @@ import { revalidateTag } from 'next/cache'
 import { TaskActionsDropDrown } from '../components/task-actions-dropdown'
 import { DeleteTask } from '../components/task-delete'
 import { EditTask } from '../components/task-edit'
+import { TaskTableCheckBox } from './task-table-checkbox'
 
 type Props = {
   task: Task
@@ -29,7 +29,7 @@ export function TaskTableRow({ task }: Props) {
       },
       body: JSON.stringify({
         name: task.name,
-        description: task.description,
+        description: task.description ? task.description : '',
         completed: !task.completed,
       }),
     })
@@ -42,8 +42,7 @@ export function TaskTableRow({ task }: Props) {
         <AlertDialog>
           <TableCell className="w-[60px]">
             <form action={handleChecked} className="flex items-center gap-2">
-              <Checkbox type="submit" checked={task.completed} />
-              <p>{task.completed ? 'concluída' : 'pendente'}</p>
+              <TaskTableCheckBox task={task} />
             </form>
           </TableCell>
           <TableCell

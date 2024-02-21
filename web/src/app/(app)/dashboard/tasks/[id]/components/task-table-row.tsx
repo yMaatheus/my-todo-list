@@ -7,21 +7,56 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Sheet, SheetTrigger } from '@/components/ui/sheet'
 import { TableCell, TableRow } from '@/components/ui/table'
+import { Task } from '@/interfaces/task'
+import clsx from 'clsx'
+import { revalidateTag } from 'next/cache'
 import { TaskActionsDropDrown } from '../components/task-actions-dropdown'
 import { DeleteTask } from '../components/task-delete'
 import { EditTask } from '../components/task-edit'
-import { Task } from '../page'
 
-export function TaskTableRow({ task }: { task: Task }) {
+type Props = {
+  task: Task
+}
+
+export function TaskTableRow({ task }: Props) {
+  async function handleChecked() {
+    'use server'
+
+    await fetch(`http://localhost:3333/task/${task.taskId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: task.name,
+        description: task.description,
+        completed: !task.completed,
+      }),
+    })
+
+    revalidateTag('task')
+  }
   return (
-    <TableRow>
+    <TableRow className={clsx(task.completed && 'bg-muted/50')}>
       <Sheet>
         <AlertDialog>
           <TableCell className="w-[60px]">
-            <Checkbox checked={task.completed} />
+            <form action={handleChecked} className="flex items-center gap-2">
+              <Checkbox type="submit" checked={task.completed} />
+              <p>{task.completed ? 'concluída' : 'pendente'}</p>
+            </form>
           </TableCell>
-          <TableCell className="font-medium text-center">{task.name}</TableCell>
-          <TableCell>{task.description ? task.description : ''}</TableCell>
+          <TableCell
+            className={clsx(
+              'font-medium text-center',
+              task.completed && 'line-through',
+            )}
+          >
+            {task.name}
+          </TableCell>
+          <TableCell className={clsx(task.completed && 'line-through')}>
+            {task.description ? task.description : ''}
+          </TableCell>
           <TableCell>
             <TaskActionsDropDrown>
               <DropdownMenuLabel>Ações</DropdownMenuLabel>
@@ -42,7 +77,7 @@ export function TaskTableRow({ task }: { task: Task }) {
           <EditTask
             taskId={task.taskId}
             name={task.name}
-            description={task.name}
+            description={task.description ? task.description : ''}
             completed={task.completed}
           />
         </AlertDialog>

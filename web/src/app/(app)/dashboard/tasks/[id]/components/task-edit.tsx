@@ -12,17 +12,14 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { revalidateTag } from 'next/cache'
 
-export function EditTask({
-  taskId,
-  name,
-  description,
-  completed,
-}: {
+type Props = {
   taskId: string
   name: string
   description: string
   completed: boolean
-}) {
+}
+
+export function EditTask({ taskId, name, description, completed }: Props) {
   async function handleSubmit(formData: FormData) {
     'use server'
 

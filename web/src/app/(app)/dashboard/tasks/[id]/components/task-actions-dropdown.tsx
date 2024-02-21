@@ -6,11 +6,11 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 
-export function TaskActionsDropDrown({
-  children,
-}: {
+type Props = {
   children: React.ReactNode
-}) {
+}
+
+export function TaskActionsDropDrown({ children }: Props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

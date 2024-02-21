@@ -5,6 +5,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { TaskResponseData } from '@/interfaces/responses/TaskResponseData'
 import { DeleteList } from './components/list-delete'
 import { EditList } from './components/list-edit'
 import { CreateTask } from './components/task-create'
@@ -14,20 +15,6 @@ type PageParams = {
   params: {
     id: string
   }
-}
-
-export type Task = {
-  taskId: string
-  name: string
-  description?: string
-  completed: boolean
-  createdAt: string
-  updatedAt: string
-}
-
-export type TaskResponseData = {
-  name: string
-  tasks: Task[]
 }
 
 export default async function Page({ params }: PageParams) {

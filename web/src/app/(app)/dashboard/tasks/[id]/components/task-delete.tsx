@@ -9,7 +9,11 @@ import {
 } from '@/components/ui/alert-dialog'
 import { revalidateTag } from 'next/cache'
 
-export function DeleteTask({ taskId }: { taskId: string }) {
+type Props = {
+  taskId: string
+}
+
+export function DeleteTask({ taskId }: Props) {
   async function handleSubmit() {
     'use server'
 

@@ -1,4 +1,3 @@
-import { ModalClose } from '@/components/modal-close'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -16,7 +15,11 @@ import { Textarea } from '@/components/ui/textarea'
 import { PlusIcon } from '@radix-ui/react-icons'
 import { revalidateTag } from 'next/cache'
 
-export function CreateTask({ id }: { id: string }) {
+type Props = {
+  listId: string
+}
+
+export function CreateTask({ listId }: Props) {
   async function handleSubmit(formData: FormData) {
     'use server'
 
@@ -27,7 +30,7 @@ export function CreateTask({ id }: { id: string }) {
 
     if (!name || !description) return
 
-    await fetch(`http://localhost:3333/task/${id}`, {
+    await fetch(`http://localhost:3333/task/${listId}`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -76,7 +79,6 @@ export function CreateTask({ id }: { id: string }) {
               </Button>
             </DialogClose>
           </DialogFooter>
-          <ModalClose />
         </form>
       </DialogContent>
     </Dialog>

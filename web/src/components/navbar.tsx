@@ -1,14 +1,10 @@
+import { ListResponseData } from '@/interfaces/responses/ListResponseData'
 import { Barbell } from '@phosphor-icons/react/dist/ssr/Barbell'
 import { HomeIcon } from '@radix-ui/react-icons'
 import { NavItem } from './nav-item'
 import { NavBarCreateTask } from './navbar-tasks/navbar-create-task'
 import { NavBarTasks } from './navbar-tasks/navbar-tasks'
 import { Accordion } from './ui/accordion'
-
-export type ListResponseData = {
-  id: string
-  name: string
-}
 
 export async function NavBar() {
   const result = await fetch('http://localhost:3333/list', {

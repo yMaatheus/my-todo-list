@@ -43,7 +43,7 @@ export default async function Page({ params }: PageParams) {
 
   const data = (await result.json()) as TaskResponseData
 
-  console.log(data)
+  // console.log(data)
 
   return (
     <div className="flex flex-1 w-4/5 flex-col space-y-6 mx-auto my-12">

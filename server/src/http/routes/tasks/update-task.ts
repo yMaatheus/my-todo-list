@@ -9,7 +9,7 @@ export async function updateTask(app: FastifyInstance) {
     })
 
     const requestBody = z.object({
-      name: z.string().min(3).max(64),
+      name: z.string().min(3).max(42),
       description: z.string().max(256).optional(),
       completed: z.boolean(),
     })

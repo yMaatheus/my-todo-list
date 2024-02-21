@@ -8,7 +8,7 @@ type TemplateProps = Readonly<{
 export default function Template({ children }: TemplateProps) {
   return (
     <main className="grid grid-cols-6 flex-1 h-screen bg-zinc-900">
-      <nav className="flex flex-1 flex-col bg-zinc-950 col-span-1">
+      <nav className="flex flex-1 flex-col bg-zinc-950 col-span-1 rounded-2xl mx-6 my-4">
         <NavBar />
       </nav>
       <div className="col-span-5">{children}</div>

@@ -1,7 +1,7 @@
-import { ModalClose } from '@/components/modal-close'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -69,11 +69,12 @@ export function EditList({ id, name }: Props) {
           </form>
         </div>
         <DialogFooter>
-          <Button type="submit" form="list-edit-form">
-            Salvar alterações
-          </Button>
+          <DialogClose asChild>
+            <Button type="submit" form="list-edit-form">
+              Salvar alterações
+            </Button>
+          </DialogClose>
         </DialogFooter>
-        <ModalClose />
       </DialogContent>
     </Dialog>
   )

@@ -1,3 +1,4 @@
+import { ScrollArea } from '@/components/ui/scroll-area'
 import {
   Table,
   TableBody,
@@ -41,19 +42,24 @@ export default async function Page({ params }: PageParams) {
 
         <DeleteList listId={id} />
       </div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[60px]">Status</TableHead>
-            <TableHead className="w-[320px] text-center">Nome</TableHead>
-            <TableHead>Descrição</TableHead>
-            <TableHead className="w-[60px]"></TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {tasks?.map((task) => <TaskTableRow key={task.taskId} task={task} />)}
-        </TableBody>
-      </Table>
+
+      <ScrollArea className="h-[calc(100vh-200px)]">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[60px]">Status</TableHead>
+              <TableHead className="w-[320px] text-center">Nome</TableHead>
+              <TableHead>Descrição</TableHead>
+              <TableHead className="w-[60px]"></TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {tasks?.map((task) => (
+              <TaskTableRow key={task.taskId} task={task} />
+            ))}
+          </TableBody>
+        </Table>
+      </ScrollArea>
     </div>
   )
 }

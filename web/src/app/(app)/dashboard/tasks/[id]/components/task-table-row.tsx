@@ -54,7 +54,11 @@ export function TaskTableRow({ task }: Props) {
             {task.name}
           </TableCell>
           <TableCell className={clsx(task.completed && 'line-through')}>
-            {task.description ? task.description : ''}
+            {task.description
+              ? task.description
+                  ?.split('\n')
+                  ?.map((item, index) => <p key={index}>{item}</p>)
+              : ''}
           </TableCell>
           <TableCell>
             <TaskActionsDropDrown>

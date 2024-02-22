@@ -65,7 +65,7 @@ export function EditTask({ taskId, name, description, completed }: Props) {
             <Textarea
               id="description"
               name="description"
-              className="resize-none"
+              className="resize-none h-64"
               defaultValue={description}
             />
           </div>

@@ -11,25 +11,25 @@ export async function createTask(app: FastifyInstance) {
 
     const requestBody = z.object({
       name: z.string().min(3).max(42),
-      description: z.string().max(256).optional(),
+      description: z.string().max(1000).optional(),
     })
 
     const { listId } = requestParams.parse(request.params)
     const { name, description } = requestBody.parse(request.body)
 
-    const { completed, createdAt, updatedAt } = await prisma.task.create({
+    const { hasCompleted, createdAt, updatedAt } = await prisma.task.create({
       data: {
         listId,
         name,
         description,
-        completed: false,
+        hasCompleted: false,
       },
     })
 
     return reply.status(StatusCodes.CREATED).send({
       name,
       description,
-      completed,
+      hasCompleted,
       createdAt,
       updatedAt,
     })

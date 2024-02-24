@@ -19,13 +19,13 @@ export async function getListTasks(app: FastifyInstance) {
         listId,
       },
       orderBy: {
-        completed: 'asc',
+        hasCompleted: 'asc',
       },
       select: {
         id: true,
         name: true,
         description: true,
-        completed: true,
+        hasCompleted: true,
         createdAt: true,
         updatedAt: true,
       },

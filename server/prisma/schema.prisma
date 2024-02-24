@@ -14,13 +14,13 @@ model List {
 }
 
 model Task {
-  id          String   @id @default(uuid())
-  name        String
-  description String?
-  listId      String
-  completed   Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(uuid())
+  name         String
+  description  String?
+  listId       String
+  hasCompleted Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   list List @relation(fields: [listId], references: [id])
 }

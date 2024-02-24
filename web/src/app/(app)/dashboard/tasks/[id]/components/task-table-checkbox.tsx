@@ -16,9 +16,9 @@ export function TaskTableCheckBox({ task }: Props) {
       {pending ? (
         <ReloadIcon className="h-4 w-4 animate-spin" />
       ) : (
-        <Checkbox type="submit" checked={task.completed} />
+        <Checkbox type="submit" checked={task.hasCompleted} />
       )}
-      <p>{task.completed ? 'concluída' : 'pendente'}</p>
+      <p>{task.hasCompleted ? 'concluída' : 'pendente'}</p>
     </>
   )
 }

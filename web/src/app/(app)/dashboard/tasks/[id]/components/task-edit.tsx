@@ -16,10 +16,10 @@ type Props = {
   taskId: string
   name: string
   description: string
-  completed: boolean
+  hasCompleted: boolean
 }
 
-export function EditTask({ taskId, name, description, completed }: Props) {
+export function EditTask({ taskId, name, description, hasCompleted }: Props) {
   async function handleSubmit(formData: FormData) {
     'use server'
 
@@ -35,7 +35,7 @@ export function EditTask({ taskId, name, description, completed }: Props) {
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify({ name, description, completed }),
+      body: JSON.stringify({ name, description, hasCompleted }),
     })
 
     revalidateTag('task')

@@ -19,6 +19,12 @@ type Props = {
 }
 
 export function TaskTableRow({ task }: Props) {
+  const hasCompletedTask = task.hasCompleted
+  const hasTaskDescription = Boolean(task.description)
+  const description = task.description
+    ?.split('\n')
+    ?.map((item, index) => <p key={index}>{item}</p>)
+
   async function handleChecked() {
     'use server'
 
@@ -29,15 +35,15 @@ export function TaskTableRow({ task }: Props) {
       },
       body: JSON.stringify({
         name: task.name,
-        description: task.description ? task.description : '',
-        completed: !task.completed,
+        description: hasTaskDescription && task.description,
+        hasCompleted: !task.hasCompleted,
       }),
     })
 
     revalidateTag('task')
   }
   return (
-    <TableRow className={clsx(task.completed && 'bg-muted/50')}>
+    <TableRow className={clsx(hasCompletedTask && 'bg-muted/50')}>
       <Sheet>
         <AlertDialog>
           <TableCell className="w-[60px]">
@@ -48,17 +54,13 @@ export function TaskTableRow({ task }: Props) {
           <TableCell
             className={clsx(
               'font-medium text-center',
-              task.completed && 'line-through',
+              hasCompletedTask && 'line-through',
             )}
           >
             {task.name}
           </TableCell>
-          <TableCell className={clsx(task.completed && 'line-through')}>
-            {task.description
-              ? task.description
-                  ?.split('\n')
-                  ?.map((item, index) => <p key={index}>{item}</p>)
-              : ''}
+          <TableCell className={clsx(hasCompletedTask && 'line-through')}>
+            {hasTaskDescription && description}
           </TableCell>
           <TableCell>
             <TaskActionsDropDrown>
@@ -81,7 +83,7 @@ export function TaskTableRow({ task }: Props) {
             taskId={task.taskId}
             name={task.name}
             description={task.description ? task.description : ''}
-            completed={task.completed}
+            hasCompleted={hasCompletedTask}
           />
         </AlertDialog>
       </Sheet>

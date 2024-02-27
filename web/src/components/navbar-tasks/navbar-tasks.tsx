@@ -27,7 +27,7 @@ export function NavBarTasks({ data, children }: Props) {
           Listas de Tarefas
         </p>
       </AccordionTrigger>
-      {data.map((item) => (
+      {data?.map((item) => (
         <AccordionContent
           key={item.id}
           className={cn('ml-8 flex items-center gap-2 p-0 hover:underline')}

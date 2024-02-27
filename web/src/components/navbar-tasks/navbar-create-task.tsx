@@ -25,7 +25,7 @@ export async function NavBarCreateTask() {
     <AccordionContent asChild>
       <form
         action={handleSubmit}
-        className="flex flex-1 flex-row gap-4 items-center m-1 hover:no-underline p-0"
+        className="m-1 flex flex-1 flex-row items-center gap-4 p-0 hover:no-underline"
       >
         <NavBarCreateTaskForm />
       </form>

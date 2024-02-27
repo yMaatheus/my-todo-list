@@ -33,9 +33,9 @@ export default async function Page({ params }: PageParams) {
   const { name, tasks } = (await result.json()) as TaskResponseData
 
   return (
-    <div className="flex flex-1 flex-col space-y-8 my-12">
+    <div className="my-12 flex flex-1 flex-col space-y-8">
       <div className="flex items-center gap-2">
-        <h1 className="text-2xl font-semibold ml-2">{name}</h1>
+        <h1 className="ml-2 text-2xl font-semibold">{name}</h1>
         <CreateTask listId={id} />
 
         <EditList id={id} name={name} />

@@ -10,7 +10,7 @@ export function NavItem({ icon, label, href }: Props) {
   return (
     <Link
       href={href}
-      className="flex text-base items-center gap-2 p-2 hover:bg-muted"
+      className="flex items-center gap-2 p-2 text-base hover:bg-muted"
     >
       {icon}
       {label}

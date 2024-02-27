@@ -53,7 +53,7 @@ export function TaskTableRow({ task }: Props) {
           </TableCell>
           <TableCell
             className={clsx(
-              'font-medium text-center',
+              'text-center font-medium',
               hasCompletedTask && 'line-through',
             )}
           >

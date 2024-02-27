@@ -9,8 +9,8 @@ type LayoutProps = Readonly<{
 
 export default function DashboardLayout({ children }: LayoutProps) {
   return (
-    <main className="grid grid-cols-10 min-h-full bg-zinc-900">
-      <nav className="flex flex-1 flex-col bg-zinc-950 col-span-2 rounded-2xl mx-6 my-4 justify-between p-6 min-w-[336px]">
+    <main className="grid min-h-full grid-cols-10 bg-zinc-900">
+      <nav className="col-span-2 mx-6 my-4 flex min-w-[336px] flex-1 flex-col justify-between rounded-2xl bg-zinc-950 p-6">
         <NavBar />
         <div>
           <NavItem
@@ -25,7 +25,7 @@ export default function DashboardLayout({ children }: LayoutProps) {
           />
         </div>
       </nav>
-      <div className="flex flex-1 col-span-8">{children}</div>
+      <div className="col-span-8 flex flex-1">{children}</div>
     </main>
   )
 }

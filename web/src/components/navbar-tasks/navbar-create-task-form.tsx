@@ -18,7 +18,7 @@ export function NavBarCreateTaskForm() {
   return (
     <>
       <Input
-        className=" h-8"
+        className="h-8"
         name="name"
         placeholder="Digite o nome da sua nova lista"
         ref={inputRef}
@@ -33,7 +33,7 @@ export function NavBarCreateTaskForm() {
         {pending ? (
           <ReloadIcon className="h-4 w-4 animate-spin" />
         ) : (
-          <CheckIcon className="w-4 h-4" />
+          <CheckIcon className="h-4 w-4" />
         )}
       </Button>
     </>
